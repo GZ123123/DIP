@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 from helper import image_loader as il
 from helper import image_covert as ic
+from helper import image_restoration as ir
 from helper import path as PATH
 from subWindow import SubWindow
 
@@ -35,6 +36,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.actionMedian_Filter.triggered.connect(self.__add_median_blur__)
         self.actionBox_Filter.triggered.connect(self.__add_box_filter__)
         self.actionBilateral_Filter.triggered.connect(self.__add__bilateral_filter__)
+        self.actionHistogram.triggered.connect(self.__add_histogram__)
+        self.actionMedian_threshold.triggered.connect(self.__add_median_threshold__)
+        self.actionRayleigh.triggered.connect(self.__add_rayleigh__)
 
     def __add_subwindow__(self,_image,_type="original"):
         if( self.image is not None ):
@@ -79,6 +83,27 @@ class MainWindow(QtWidgets.QMainWindow):
         blur_image = ic.__transform_to_bilateral_filter(self.image)
         self.add_filtering_image("bilateral_filter",blur_image)
         self.__add_subwindow__(blur_image,"Bilateral Filter")
+
+    def __add_histogram__(self):
+        if(self.image is None): 
+            self.__choose_image__() 
+        blur_image = ic.__apply_histogram(self.image)
+        self.add_filtering_image("histogram",blur_image)
+        self.__add_subwindow__(blur_image,"Histogram")
+
+    def __add_median_threshold__(self):
+        if(self.image is None): 
+            self.__choose_image__() 
+        blur_image = ic.__median_threshold(self.image)
+        self.add_filtering_image("median_threhold",blur_image)
+        self.__add_subwindow__(blur_image,"Median Threshold")
+
+    def __add_rayleigh__(self):
+        if(self.image is None): 
+            self.__choose_image__() 
+        blur_image = ir.__rayleigh__(self.image)
+        self.add_filtering_image("rayleigh",blur_image)
+        self.__add_subwindow__(blur_image,"Rayleigh")
 
     def __choose_image__(self):
         self.file_path, _ = QtWidgets.QFileDialog.getOpenFileName(self,

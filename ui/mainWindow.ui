@@ -46,9 +46,17 @@
     <addaction name="actionBox_Filter"/>
     <addaction name="actionMedian_Filter"/>
     <addaction name="actionBilateral_Filter"/>
+    <addaction name="actionMedian_threshold"/>
+   </widget>
+   <widget class="QMenu" name="menuOrder">
+    <property name="title">
+     <string>Order</string>
+    </property>
+    <addaction name="actionHistogram"/>
    </widget>
    <addaction name="menuFIle"/>
    <addaction name="menuImage"/>
+   <addaction name="menuOrder"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -88,6 +96,41 @@
   <action name="actionBilateral_Filter">
    <property name="text">
     <string>Bilateral Filter</string>
+   </property>
+  </action>
+  <action name="actionHistogram">
+   <property name="text">
+    <string>Histogram</string>
+   </property>
+  </action>
+  <action name="actionMedian_threshold">
+   <property name="text">
+    <string>Median threshold</string>
+   </property>
+  </action>
+  <action name="actionErlang">
+   <property name="text">
+    <string>Erlang</string>
+   </property>
+  </action>
+  <action name="actionRayleigh">
+   <property name="text">
+    <string>Rayleigh</string>
+   </property>
+  </action>
+  <action name="actionUniform">
+   <property name="text">
+    <string>Uniform</string>
+   </property>
+  </action>
+  <action name="actionGamma">
+   <property name="text">
+    <string>Gamma</string>
+   </property>
+  </action>
+  <action name="actionExponal">
+   <property name="text">
+    <string>Expomential</string>
    </property>
   </action>
  </widget>
