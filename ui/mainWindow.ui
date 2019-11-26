@@ -53,6 +53,7 @@
      <string>Order</string>
     </property>
     <addaction name="actionHistogram"/>
+    <addaction name="actionEdge_Detection"/>
    </widget>
    <addaction name="menuFIle"/>
    <addaction name="menuImage"/>
@@ -131,6 +132,11 @@
   <action name="actionExponal">
    <property name="text">
     <string>Expomential</string>
+   </property>
+  </action>
+  <action name="actionEdge_Detection">
+   <property name="text">
+    <string>Edge Detection</string>
    </property>
   </action>
  </widget>

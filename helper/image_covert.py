@@ -1,4 +1,6 @@
 import cv2
+import numpy as np
+from scipy import ndimage
 
 def _MainWindow__transform_to_gray(image):
     return cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)
@@ -29,3 +31,14 @@ def _MainWindow__median_threshold(image,size_n, thresh):
                 new[i:i,j:j] = image[i:i,j:j]
     return new
 
+def scale_to_0_255(img):
+    min_val = np.min(img)
+    max_val = np.max(img)
+    new_img = (img - min_val) / (max_val - min_val) # 0-1
+    new_img *= 255
+    return new_img
+
+def _MainWindow__edge_detection(image):
+    edges = cv2.Canny(image, 50, 50)
+    cv2.imshow("edge",edges)
+    

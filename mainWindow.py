@@ -39,6 +39,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.actionHistogram.triggered.connect(self.__add_histogram__)
         self.actionMedian_threshold.triggered.connect(self.__add_median_threshold__)
         self.actionRayleigh.triggered.connect(self.__add_rayleigh__)
+        self.actionEdge_Detection.triggered.connect(self.__edge_detection__)
 
     def __add_subwindow__(self,_image,_type="original"):
         if( self.image is not None ):
@@ -46,6 +47,7 @@ class MainWindow(QtWidgets.QMainWindow):
             _subWindow = SubWindow(self,_image,_type)
             self.gridLayout.addWidget(_subWindow,(self.subIndex)/3,(self.subIndex) % 3)
             self.subIndex+=1
+            return _subWindow
         else: 
             self.__choose_image__()
 
@@ -105,6 +107,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.add_filtering_image("rayleigh",blur_image)
         self.__add_subwindow__(blur_image,"Rayleigh")
 
+    def __edge_detection__(self):
+        if(self.image is None): 
+            self.__choose_image__()
+        ic.__edge_detection(self.image)
+       
     def __choose_image__(self):
         self.file_path, _ = QtWidgets.QFileDialog.getOpenFileName(self,
                                                              "Open Image...", filter="Image formats: *.png; *.jpg; *.tif")
@@ -112,14 +119,14 @@ class MainWindow(QtWidgets.QMainWindow):
         currentImage = False
         if(self.image is not None):
             currentImage = True
+
         if (self.file_path):
             self.image = il.__load_image__(self.file_path)
         if(currentImage is False):
-            self.__add_subwindow__(self.image)
+            self.orinal = self.__add_subwindow__(self.image)
         else : 
-            return
-            # self.__add_subwindow__(self.image)
-    
+            self.orinal.__reset__(self.image)
+            
     def __save_image__(self):
         if len(self.imageList) > 0:
             file_name = PATH.get_filename(self.file_path)

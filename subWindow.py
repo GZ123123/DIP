@@ -20,6 +20,11 @@ class SubWindow(QtWidgets.QWidget):
         self.__contruct(text)
         self.__connect__()
 
+    def __reset__(self,image):
+        image = il.__convert_to_QtImage__(image)
+        self.widget = il.__convert_to_QtWidget__(image)
+        self.__real_scale__()
+        
     def resizeEvent(self, event):
         QtWidgets.QWidget.resizeEvent(self, event)
         
